@@ -8,7 +8,7 @@ namespace NotesRestApi.Dao
 {
     interface INoteDao
     {
-        public Note AddNote(Note note);
+        public void AddNote(Note note);
         public void DeleteNote(int id);
         public void UpdateNote(Note note);
         public Note GetNote(int id);

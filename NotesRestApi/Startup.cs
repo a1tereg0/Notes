@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NotesRestApi.Context;
+using NotesRestApi.Dao;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,7 @@ namespace NotesRestApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString("NoteDbContextConnectionString"));
             });
+            services.AddScoped<INoteDao, NoteDao>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

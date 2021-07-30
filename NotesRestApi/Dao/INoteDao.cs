@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NotesRestApi.Dao
 {
-    interface INoteDao
+    public interface INoteDao
     {
         public void AddNote(Note note);
         public void DeleteNote(int id);

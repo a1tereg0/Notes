@@ -2,6 +2,31 @@
     font-size: 1.2rem;
 }
 
+ul {
+    padding:0;
+}
+
+li {
+    list-style-type:none;
+}
+
+li a {
+    color: white;
+    font-weight: 300;
+    width: fit-content;
+    display: block;
+    margin: 1rem auto;
+}
+
+
+button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 1rem auto;
+    display: block;
+}
+
 .app-notes {
     min-height: 100vh;
     display: flex;
@@ -14,6 +39,10 @@
 
 .app-notes-browse {
     background: #444444;
+}
+
+.app-notes-browse ul {
+    color: white;
 }
 
 .app-notes-list {

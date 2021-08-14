@@ -7,20 +7,25 @@
 <main class="app-notes">
     <section class="app-notes-item app-notes-browse">
         <ul class="notes-browse-list">
-        <li><button id="add-notes-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-            </button></li>
+            <li class="browse-list-item-add">
+                <button id="add-notes-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                </button>
+            </li>
             <li><a id="all-notes">All notes</a></li>
         </ul>
     </section>
     <section class="app-notes-item app-notes-list">
         <ul class="notes-list-group" id="notes-list-group">
-
         </ul>
     </section>
     <section class="app-notes-item app-notes-edit">
         <textarea class="notes-edit-text" id="notes-edit-text"></textarea>
     </section>
+    <div class="controls">
+        <button id="controls-delete"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+        <button id="controls-copy"><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></button>
+    </div>
 </main>
 
 <script>
@@ -29,11 +34,34 @@
     const notesListGroup = document.getElementById('notes-list-group');
     const addNotesBtn = document.getElementById('add-notes-btn');
     const notesEditText = document.getElementById('notes-edit-text');
-    addNotesBtn.addEventListener('click', (e => {
-        e.preventDefault();
-        alert("Hasn't been implemented yet!");
-    }));
     const allNotesElement = document.getElementById('all-notes');
+    
+    addNotesBtn.addEventListener('click', (e => {
+        console.log(allNotes);
+        e.preventDefault();
+        fetch(`http://localhost:5000/api/Notes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: "New Note", description: "" })
+        })
+            .then(r => r.json())
+            .then(newNote => {
+                allNotes.push(newNote);
+                const noteItem = document.createElement('li');
+                noteItem.setAttribute("data-key", newNote.id);
+                const noteItemLink = document.createElement('a');
+                const noteTitle = document.createTextNode(newNote.title);
+                noteItemLink.append(noteTitle);
+                noteItem.append(noteItemLink);
+                notesListGroup.prepend(noteItem);
+                notesEditText.setAttribute("data-notekey", newNote.id);
+                notesEditText.value = "";
+                notesEditText.focus();
+            });
+
+    }));
     allNotesElement.addEventListener('click', e => {
         e.preventDefault();
         if (allNotes === null) {
@@ -74,18 +102,24 @@
         if (timer === null) clearTimeout(timer);
         timer = setTimeout(() => {
             const noteId = notesEditText.dataset.notekey;
-            if (noteId !== "") {
-                const currentNote = allNotes.find((n) => n.id === parseInt(noteId))
+            if (noteId !== undefined) {
+                const currentNote = allNotes.find((n) => n.id === parseInt(noteId));
+                currentNote.title = notesEditText.value.slice(0, 12);
+                currentNote.description = notesEditText.value;
+                const selector = "[data-key=" + "'" + noteId + "']";
+                const listItem = notesListGroup.querySelector(selector);
+                listItem.querySelector('a').text = currentNote.title;
+          
                 fetch(`http://localhost:5000/api/Notes/${noteId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ ...currentNote, description: notesEditText.value })
-                })
+                    body: JSON.stringify(currentNote)
+                });
             }
-        }, 2000)
+        }, 1000)
     })
 
-
+    allNotesElement.click();
 </script>

@@ -24,6 +24,8 @@
 </main>
 
 <script>
+    let allNotes = null;
+    let timer = null;
     const notesListGroup = document.getElementById('notes-list-group');
     const addNotesBtn = document.getElementById('add-notes-btn');
     const notesEditText = document.getElementById('notes-edit-text');
@@ -32,7 +34,6 @@
         alert("Hasn't been implemented yet!");
     }));
     const allNotesElement = document.getElementById('all-notes');
-    let allNotes = null;
     allNotesElement.addEventListener('click', e => {
         e.preventDefault();
         if (allNotes === null) {
@@ -63,9 +64,28 @@
         fetch(`http://localhost:5000/api/Notes/${noteItemId}`)
             .then(res => res.json())
             .then(data => {
+                notesEditText.setAttribute("data-notekey", noteItemId)
                 notesEditText.value = data.description;
             })
     });
+
+    // Updating editText
+    notesEditText.addEventListener('input', (e) => {
+        if (timer === null) clearTimeout(timer);
+        timer = setTimeout(() => {
+            const noteId = notesEditText.dataset.notekey;
+            if (noteId !== "") {
+                const currentNote = allNotes.find((n) => n.id === parseInt(noteId))
+                fetch(`http://localhost:5000/api/Notes/${noteId}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ...currentNote, description: notesEditText.value })
+                })
+            }
+        }, 2000)
+    })
 
 
 </script>

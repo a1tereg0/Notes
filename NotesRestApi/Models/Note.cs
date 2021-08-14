@@ -13,8 +13,7 @@ namespace NotesRestApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [StringLength(60, ErrorMessage = "Your title should exceed sixty characters")]
-        [Required]
+        [DataType(DataType.Text)]
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]

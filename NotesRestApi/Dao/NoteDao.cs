@@ -15,11 +15,11 @@ namespace NotesRestApi.Dao
             _context = context;
         }
 
-        public int AddNote(Note note)
+        public Note AddNote(Note note)
         {
             _context.Notes.Add(note);
             _context.SaveChanges();
-            return note.Id;
+            return note;
         }
 
         public void DeleteNote(int id)

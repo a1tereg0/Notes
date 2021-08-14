@@ -41,8 +41,8 @@ namespace NotesRestApi.Controllers
         [Route("api/[controller]")]
         public IActionResult AddNote(Note note)
         {
-            int id = _noteDao.AddNote(note);
-            return Ok(id);
+            Note noteAdded = _noteDao.AddNote(note);
+            return Ok(noteAdded);
         }
 
 

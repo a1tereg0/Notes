@@ -39,12 +39,14 @@
     const addNotesBtn = document.getElementById('add-notes-btn');
     const notesEditText = document.getElementById('notes-edit-text');
     const allNotesElement = document.getElementById('all-notes');
+    notesEditText.disabled = true;
     
     addNotesBtn.addEventListener('click', (e => {
         if (buttonControls.classList.contains("hidden")) {
             buttonControls.classList.add("visible");
             buttonControls.classList.remove("hidden");
         }
+        if (notesEditText.disabled) notesEditText.disabled = false;
         e.preventDefault();
         fetch(`http://localhost:5000/api/Notes`, {
             method: 'POST',
@@ -98,6 +100,7 @@
             buttonControls.classList.add("visible");
             buttonControls.classList.remove("hidden");
         }
+        if (notesEditText.disabled) notesEditText.disabled = false;
         let listItemElement = e.target.tagName === 'A' ? e.target.parentElement : e.target;
         const noteItemId = listItemElement.dataset.key;
         fetch(`http://localhost:5000/api/Notes/${noteItemId}`)

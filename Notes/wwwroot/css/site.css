@@ -113,3 +113,11 @@ div.controls {
         background: #C0C0C0;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility:visible;
+}
+

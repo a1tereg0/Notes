@@ -37,4 +37,3 @@ C:\Users\prasa\source\repos\NotesRestApi\Notes\obj\Debug\net5.0\ref\Notes.dll
 C:\Users\prasa\source\repos\NotesRestApi\Notes\obj\Debug\net5.0\Notes.pdb
 C:\Users\prasa\source\repos\NotesRestApi\Notes\obj\Debug\net5.0\Notes.genruntimeconfig.cache
 C:\Users\prasa\source\repos\NotesRestApi\Notes\obj\Debug\net5.0\Notes.csproj.CopyComplete
-C:\Users\prasa\source\repos\NotesRestApi\Notes\obj\Debug\net5.0\Notes.csproj.AssemblyReference.cache

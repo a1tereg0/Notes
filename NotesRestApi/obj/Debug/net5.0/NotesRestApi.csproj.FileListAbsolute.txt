@@ -56,4 +56,6 @@ C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\obj\Debug\net5.0\NotesRest
 C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\obj\Debug\net5.0\ref\NotesRestApi.dll
 C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\obj\Debug\net5.0\NotesRestApi.pdb
 C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\obj\Debug\net5.0\NotesRestApi.genruntimeconfig.cache
+C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\bin\Debug\net5.0\ref\NotesRestApi.dll
+C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\bin\Debug\net5.0\NotesRestApi.pdb
 C:\Users\prasa\source\repos\NotesRestApi\NotesRestApi\obj\Debug\net5.0\NotesRestApi.csproj.AssemblyReference.cache

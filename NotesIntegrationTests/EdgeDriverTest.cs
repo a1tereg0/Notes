@@ -31,9 +31,21 @@ namespace NotesIntegrationTests
         public void VerifyPageTitle()
         {
             // Replace with your own test logic
-            _driver.Url = "https://www.bing.com";
-            Assert.AreEqual("Bing", _driver.Title);
+            _driver.Url = "https://localhost:44339";
+            Assert.AreEqual("Home page - Notes", _driver.Title);
         }
+
+        [TestMethod]
+        public void NoteEditTextIsDisabledOnStartup()
+        {
+            // Replace with your own test logic
+            _driver.Url = "https://localhost:44339";
+            var noteEditTextArea = _driver.FindElementById("notes-edit-text");
+            noteEditTextArea.SendKeys("Hello, World!");
+            Assert.IsTrue(noteEditTextArea.Text == "");
+        }
+
+
 
         [TestCleanup]
         public void EdgeDriverCleanup()
